@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Batt Docs">
+        <meta name="description" content="Control and limit battery charging on Apple Silicon MacBooks.">
       
       
         <meta name="author" content="charlie0129">
@@ -895,7 +895,7 @@
 <p><strong>It is simple but well-thought.</strong> It only does charge limiting and does it well. On firmware &lt; <code>20xxx</code>, <code>batt</code> handles sleep edge cases that can otherwise let a MacBook charge to 100%. On newer firmware, it delegates the range to Apple SMC so enforcement continues during sleep. Other features are intentionally limited to keep it simple. If you encounter a problem or want an additional feature, please raise an issue.</p>
 <p><strong>It is light-weight.</strong> No electron GUIs hogging your system resources like some other tools. You can use batt on the command-line, or use the native macOS menubar app if you prefer a GUI. The GUI is written using native macOS APIs, so it is light-weight and fast.</p>
 <h3 id="but-macos-has-similar-features-built-in-is-it">But macOS has similar features built-in, is it?<a class="headerlink" href="#but-macos-has-similar-features-built-in-is-it" title="Permanent link">&para;</a></h3>
-<p>Yes, macOS have optimized battery charging. It will try to find out your charging and working schedule and prohibits charging above 80% for a couple of hours overnight. However, if you have an un-regular schedule, this will simply not work. Also, you lose predictability (which I value a lot) about your computer's behavior, i.e., by letting macOS decide for you, you, the one who knows your schedule the best, cannot control when to charge or when not to charge.</p>
+<p>Yes, macOS has optimized battery charging. It will try to find out your charging and working schedule and prohibits charging above 80% for a couple of hours overnight. However, if you have an un-regular schedule, this will simply not work. Also, you lose predictability (which I value a lot) about your computer's behavior, i.e., by letting macOS decide for you, you, the one who knows your schedule the best, cannot control when to charge or when not to charge.</p>
 <p><code>batt</code> can make sure your computer does exactly what you want. You can set a maximum charge level, and it will stop charging when the battery reaches that level. Therefore, it is recommended to disable macOS's optimized charging when using <code>batt</code>.</p>
 
 

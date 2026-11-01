@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Batt Docs">
+        <meta name="description" content="Control and limit battery charging on Apple Silicon MacBooks.">
       
       
         <meta name="author" content="charlie0129">
@@ -1424,7 +1424,7 @@ Built-in charge limit also need to be disabled if you are on macOS 26.4 or later
 <p>Make sure your computer doesn't charge beyond what you said.</p>
 <p>Setting the limit to 10-99 will enable the battery charge limit, limiting the maximum charge to <em>somewhere around</em> your setting. However, setting the limit to 100 will disable the battery charge limit.</p>
 <p>By default, <code>batt</code> will set a 60% charge limit.</p>
-<p>To customize charge limit, see <code>batt limit</code>. For example,to set the limit to 80%, run <code>batt limit 80</code>. To disable the limit, run <code>batt disable</code> or <code>batt limit 100</code>.</p>
+<p>To customize charge limit, see <code>batt limit</code>. For example, to set the limit to 80%, run <code>batt limit 80</code>. To disable the limit, run <code>batt disable</code> or <code>batt limit 100</code>.</p>
 <p>To disable the limit only temporarily, use <code>batt disable --for=1d</code>. Your current limit is restored automatically once the duration has elapsed, even if your Mac reboots in the meantime. Durations accept minutes, hours, days and weeks, e.g. <code>30m</code>, <code>2h</code>, <code>1d</code>, <code>1w</code>. Setting a limit with <code>batt limit</code> before the duration elapses cancels the scheduled restore. <code>batt status</code> shows when the limit will be restored.</p>
 <h3 id="charge-once">Charge once<a class="headerlink" href="#charge-once" title="Permanent link">&para;</a></h3>
 <p>Charge the battery once without changing your charge limit.</p>
@@ -1529,7 +1529,7 @@ batt<span class="w"> </span>schedule<span class="w"> </span>skip<span class="w">
 <p>Set whether to prevent idle sleep during a charging session.</p>
 <p>Due to macOS limitations, <code>batt</code> will be paused when your computer goes to sleep. As a result, when you are in a charging session and your computer goes to sleep, there is no way for batt to stop charging (since batt is paused by macOS) and the battery will charge to 100%. This option, together with disable-charging-pre-sleep, will prevent this from happening.</p>
 <p>This option tells macOS NOT to go to sleep when the computer is in a charging session, so batt can continue to work until charging is finished. Note that it will only prevent <strong>idle</strong> sleep, when 1) charging is active 2) battery charge limit is enabled. So your computer can go to sleep as soon as a charging session is completed.</p>
-<p>However, this options does not prevent manual sleep (limitation of macOS). For example, if you manually put your computer to sleep (by choosing the Sleep option in the top-left Apple menu) or close the lid, batt will still be paused and the issue mentioned above will still happen. This is where disable-charging-pre-sleep comes in. See <a href="#disabling-charging-before-sleep">Disabling charging before sleep</a>.</p>
+<p>However, this option does not prevent manual sleep (limitation of macOS). For example, if you manually put your computer to sleep (by choosing the Sleep option in the top-left Apple menu) or close the lid, batt will still be paused and the issue mentioned above will still happen. This is where disable-charging-pre-sleep comes in. See <a href="#disabling-charging-before-sleep">Disabling charging before sleep</a>.</p>
 <p>To enable this feature, run <code>sudo batt prevent-idle-sleep enable</code>. To disable, run <code>sudo batt prevent-idle-sleep disable</code>.</p>
 <h3 id="disabling-charging-before-sleep">Disabling charging before sleep<a class="headerlink" href="#disabling-charging-before-sleep" title="Permanent link">&para;</a></h3>
 <div class="admonition note">
