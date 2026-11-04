@@ -1418,13 +1418,14 @@
 <p class="admonition-title">Tip</p>
 <p>It is <em>highly</em> recommended to disable macOS's optimized charging when using <code>batt</code>. <br>
 To do so, open <code>System Settings</code> -&gt; <code>Battery</code> -&gt; <code>Battery Health</code> -&gt; <code>i</code> -&gt; Turn OFF <code>Optimized Battery Charging</code>. <br>
-Built-in charge limit also need to be disabled if you are on macOS 26.4 or later.</p>
+Disable the built-in charge limit when using direct SMC control. In native mode, <code>batt</code> manages that setting itself.</p>
 </div>
 <h3 id="limit-battery-charge">Limit battery charge<a class="headerlink" href="#limit-battery-charge" title="Permanent link">&para;</a></h3>
-<p>Make sure your computer doesn't charge beyond what you said.</p>
+<p>Set a maximum charge target. In native mode, macOS controls enforcement timing and full-charge overrides.</p>
 <p>Setting the limit to 10-99 will enable the battery charge limit, limiting the maximum charge to <em>somewhere around</em> your setting. However, setting the limit to 100 will disable the battery charge limit.</p>
 <p>By default, <code>batt</code> will set a 60% charge limit.</p>
 <p>To customize charge limit, see <code>batt limit</code>. For example, to set the limit to 80%, run <code>batt limit 80</code>. To disable the limit, run <code>batt disable</code> or <code>batt limit 100</code>.</p>
+<p>In native mode, disabling releases the limit and leaves charging to macOS; it does not restore earlier Apple charge-limit settings.</p>
 <p>To disable the limit only temporarily, use <code>batt disable --for=1d</code>. Your current limit is restored automatically once the duration has elapsed, even if your Mac reboots in the meantime. Durations accept minutes, hours, days and weeks, e.g. <code>30m</code>, <code>2h</code>, <code>1d</code>, <code>1w</code>. Setting a limit with <code>batt limit</code> before the duration elapses cancels the scheduled restore. <code>batt status</code> shows when the limit will be restored.</p>
 <h3 id="charge-once">Charge once<a class="headerlink" href="#charge-once" title="Permanent link">&para;</a></h3>
 <p>Charge the battery once without changing your charge limit.</p>
@@ -1435,8 +1436,8 @@ Built-in charge limit also need to be disabled if you are on macOS 26.4 or later
 </ul>
 <p>Your charge limit and lower-limit delta stay as they are, so normal behavior resumes by itself. A one-time charge survives a daemon restart and a reboot. Setting a limit with <code>batt limit</code> cancels it too. <code>batt status</code> shows a running one-time charge.</p>
 <p>A one-time charge and a disabled power adapter exclude each other, because cutting power stops the charge. <code>batt</code> refuses to start one while the other is active and names the conflict.</p>
-<p>On <code>20xxx</code> firmware, <code>batt charge now</code> hands the firmware the narrowest range that ends at your limit, and the firmware does not start charging from the top of that range. A one-time charge to the limit can therefore finish one percent short of it. <code>batt charge full</code> is exact, because it deactivates the limit instead of narrowing it.</p>
-<p>When macOS controls the charge limit natively, it decides when charging starts. <code>batt charge now</code> is unavailable in that mode; <code>batt charge full</code> temporarily disables the native limit, then restores it at 100%. In adapter mode, both one-time actions use the adapter to control charging.</p>
+<p>In firmware-managed mode, <code>batt charge now</code> hands the firmware the narrowest range that ends at your limit, and the firmware does not start charging from the top of that range. A one-time charge to the limit can therefore finish one percent short of it. <code>batt charge full</code> is exact, because it deactivates the limit instead of narrowing it.</p>
+<p>Native mode does not support <code>batt charge now</code>, because macOS controls when charging resumes. <code>batt charge full</code> temporarily releases the native limit, then restores it at 100%. In adapter mode, both one-time actions use the adapter to control charging.</p>
 <p>The GUI exposes the same actions in the menubar as <strong>Charge to 70% Now</strong> and <strong>Charge to Full Once</strong>, with the current progress and a <strong>Cancel One-Time Charge</strong> item while one is running.</p>
 <h3 id="enabledisable-power-adapter">Enable/disable power adapter<a class="headerlink" href="#enabledisable-power-adapter" title="Permanent link">&para;</a></h3>
 <p>Cut or restore power from the wall. This has the same effect as unplugging/plugging the power adapter, even if the adapter is physically plugged in.</p>
@@ -1583,7 +1584,8 @@ batt<span class="w"> </span>schedule<span class="w"> </span>skip<span class="w">
 <p>This feature is CLI-only and is not available in the GUI version.</p>
 </div>
 <p>When you set a charge limit, for example, on a Lenovo ThinkPad, you can set two percentages. The first one is the upper limit, and the second one is the lower limit. When the battery charge is above the upper limit, the computer will stop charging. When the battery charge is below the lower limit, the computer will start charging. If the battery charge is between the two limits, the computer will keep whatever charging state it is in.</p>
-<p><code>batt</code> has similar features built-in. The charge limit you have set (using <code>batt limit</code>) will be used as the upper limit. By default, The lower limit will be set to 2% less than the upper limit. To customize the lower limit, use <code>batt lower-limit-delta</code>.</p>
+<p>Native mode uses only the upper target and ignores any saved lower-limit delta. The following applies to legacy, firmware-managed and adapter modes.</p>
+<p><code>batt</code> has similar features built-in. The charge limit you have set (using <code>batt limit</code>) will be used as the upper limit. By default, the lower limit will be set to 2% less than the upper limit. To customize the lower limit, use <code>batt lower-limit-delta</code>.</p>
 <p>For example, if you want to set the lower limit to be 5% less than the upper limit, run <code>sudo batt lower-limit-delta 5</code>. So, if you have your charge (upper) limit set to 60%, the lower limit will be 55%.</p>
 <h3 id="control-magsafe-led">Control MagSafe LED<a class="headerlink" href="#control-magsafe-led" title="Permanent link">&para;</a></h3>
 <blockquote>
@@ -1596,7 +1598,7 @@ batt<span class="w"> </span>schedule<span class="w"> </span>skip<span class="w">
 <li>Off: just woken up from sleep, charging is disabled and batt is waiting before controlling charging.</li>
 </ul>
 <p>Note that you must have a MagSafe LED on your MacBook to use this feature.</p>
-<p>This also requires <code>batt</code> to make the charging decision itself: legacy direct charging control, or adapter mode on gated macOS 27 firmware. It is unavailable with the firmware-managed limit on macOS 27 / 20xxx firmware even if the Mac has a physical MagSafe LED, because firmware owns the charging decision and <code>batt</code> cannot reliably mirror its state.</p>
+<p>This also requires legacy direct charging control. It is unavailable on macOS 27 / 20xxx firmware even if the Mac has a physical MagSafe LED, because firmware owns the charging decision and <code>batt</code> cannot reliably mirror its state.</p>
 <p>To enable MagSafe LED control, run <code>sudo batt magsafe-led enable</code>.</p>
 <p>To force the MagSafe LED to stay off, run <code>sudo batt magsafe-led always-off</code>.</p>
 <h3 id="check-logs">Check logs<a class="headerlink" href="#check-logs" title="Permanent link">&para;</a></h3>

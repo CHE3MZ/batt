@@ -482,10 +482,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#macos-27-firmware-with-gated-charge-keys-adapter-mode" class="md-nav__link">
+  <a href="#macos-27-firmware-with-gated-charge-keys" class="md-nav__link">
     <span class="md-ellipsis">
       
-        macOS 27 firmware with gated charge keys (adapter mode)
+        macOS 27 firmware with gated charge keys
       
     </span>
   </a>
@@ -796,10 +796,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#macos-27-firmware-with-gated-charge-keys-adapter-mode" class="md-nav__link">
+  <a href="#macos-27-firmware-with-gated-charge-keys" class="md-nav__link">
     <span class="md-ellipsis">
       
-        macOS 27 firmware with gated charge keys (adapter mode)
+        macOS 27 firmware with gated charge keys
       
     </span>
   </a>
@@ -987,10 +987,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#macos-27-firmware-with-gated-charge-keys-adapter-mode" class="md-nav__link">
+  <a href="#macos-27-firmware-with-gated-charge-keys" class="md-nav__link">
     <span class="md-ellipsis">
       
-        macOS 27 firmware with gated charge keys (adapter mode)
+        macOS 27 firmware with gated charge keys
       
     </span>
   </a>
@@ -1101,7 +1101,7 @@
 <td>✅</td>
 <td>✅</td>
 <td>✅</td>
-<td>Charge keys gated; adapter mode. Any limit, incl. below 80%. See below</td>
+<td><strong>Requires</strong> a usable native or opt-in adapter backend. Native support depends on macOS; see below</td>
 </tr>
 <tr>
 <td>Other</td>
@@ -1123,7 +1123,7 @@
 <p class="admonition-title">Note</p>
 <p>Firmware version is different from macOS version. Old macOS versions may have newer firmware, e.g. macOS 15 with firmware <code>138xx.x.x</code> (macOS Tahoe version).</p>
 </div>
-<p><code>batt</code> does not branch on the reported macOS or firmware version. It probes usable SMC keys at runtime (mainly tied to the firmware version, not the macOS version). This also handles an older macOS installation receiving newer firmware.</p>
+<p><code>batt</code> probes usable SMC keys or PowerUIAgent ( macOS system service ) at runtime, including when an older macOS installation receives newer firmware. Exact native targets require macOS 27.</p>
 <p>If you want to know which MacBooks I personally developed it on, I am using it on all my personal MacBooks every single day, including MacBook Air M1 2020 (A2337), MacBook Air M2 2022 (A2681), MacBook Pro 14' M1 Pro 2021 (A2442), MacBook Pro 16' M1 Max 2021 (A2485).</p>
 <p>If you encounter any incompatibility, please raise an issue with your MacBook model, firmware version, batt version, macOS version, and batt logs (<code>/tmp/batt.log</code>, or <code>/var/log/batt.log</code> if installed v0.7.5+ using Homebrew).</p>
 <h3 id="macos-27-20xxx-firmware-behavior">macOS 27 / 20xxx firmware behavior<a class="headerlink" href="#macos-27-20xxx-firmware-behavior" title="Permanent link">&para;</a></h3>
@@ -1135,10 +1135,11 @@
 <li>Legacy sleep options are unavailable and unnecessary. Incompatible values left in the configuration after an upgrade are disabled by the daemon.</li>
 </ul>
 <p>The daemon reports these capabilities to current CLI and GUI clients. Older daemons that do not provide detailed compatibility data retain the previous permissive client behavior.</p>
-<h3 id="macos-27-firmware-with-gated-charge-keys-adapter-mode">macOS 27 firmware with gated charge keys (adapter mode)<a class="headerlink" href="#macos-27-firmware-with-gated-charge-keys-adapter-mode" title="Permanent link">&para;</a></h3>
+<h3 id="macos-27-firmware-with-gated-charge-keys">macOS 27 firmware with gated charge keys<a class="headerlink" href="#macos-27-firmware-with-gated-charge-keys" title="Permanent link">&para;</a></h3>
 <p>Starting with macOS 27 Developer Beta 4 (firmware <code>20457.0.125.0.2</code>+, also shipped in some macOS 15.x / 26.x security updates), Apple gated the SMC charge-control keys behind a private entitlement (<code>com.apple.private.iokit.soc-limit</code>). Both the legacy keys (<code>CH0B</code>/<code>CH0C</code>/<code>CHTE</code>) and the firmware-limit keys (<code>bfF0</code>/<code>bfD0</code>/<code>bfE0</code>) now return <code>kIOReturnNotPrivileged</code> even to root, so neither the legacy nor the firmware backend works. See <a href="https://github.com/charlie0129/batt/issues/152">#152</a>.</p>
-<p>The macOS charge limit built into System Settings still works, but it is enforced by <code>powerd</code> behind that entitlement and only offers a fixed set of values <strong>at or above 80%</strong>.</p>
-<p>To keep charge limiting working, including limits <strong>below 80%</strong>, <code>batt</code> offers an opt-in <strong>adapter mode</strong>, enabled at runtime with <code>sudo batt adapter-mode enable</code>. The adapter (wall-power) SMC key is not entitlement-gated, so <code>batt</code> runs the same ThinkPad-style hysteresis loop it uses in legacy mode, but toggles wall power instead of the charge state:</p>
+<p><code>batt</code> automatically uses the native macOS charge limit through PowerUIAgent when direct SMC control is unavailable. On macOS 27, <code>sudo batt limit 55</code> requests 55%, bypassing the slider's 80% minimum. Targets from 10–99% are supported; 100% releases the limit. Older native backends use the values offered by macOS.</p>
+<p>Native mode uses a single upper target and retains it during sleep. It does not support <code>lower-limit-delta</code>, MagSafe LED control or legacy sleep options. Changes can take several minutes. <strong>If the battery is above the limit, macOS may drain it toward the target even while the Mac is plugged in.</strong> macOS may also temporarily charge fully; <code>batt status</code> and the GUI report Apple's full-charge override when available. Check <code>batt status</code> and <code>pmset -g battlimit</code> after changing a target; an accepted request does not mean charging has already stopped.</p>
+<p>As an alternative, <code>batt</code> offers an opt-in <strong>adapter mode</strong>, enabled at runtime with <code>sudo batt adapter-mode enable</code>. The adapter (wall-power) SMC key is not entitlement-gated, so <code>batt</code> runs the same ThinkPad-style hysteresis loop it uses in legacy mode, but toggles wall power instead of the charge state:</p>
 <ul>
 <li>When the battery reaches the upper limit, <code>batt</code> cuts wall power (the Mac runs from the battery, even though the adapter is physically plugged in), so the charge falls.</li>
 <li>When the battery drops to the lower limit, <code>batt</code> restores wall power and the Mac charges again.</li>
@@ -1149,10 +1150,10 @@
 <li>The limit is enforced only while <code>batt</code> is awake. Just before sleep <code>batt</code> restores/holds a safe state (charging is disabled pre-sleep by default) to avoid overcharging while asleep; the sleep options apply as in legacy mode.</li>
 <li>In Clamshell mode (lid closed with an external display), cutting wall power makes the Mac sleep unless <code>batt prevent-sleep-on-adapter-disable</code> is enabled. This opt-in setting also applies to adapter mode; it prevents all system sleep while wall power is cut. See <a href="../usage/#prevent-sleep-when-adapter-is-disabled">Prevent sleep when adapter is disabled</a> for safety warnings.</li>
 <li>Because <code>batt</code> owns the adapter to enforce the limit, the manual <code>batt adapter</code> / GUI Force Discharge feature and auto-calibration are disabled in this mode.</li>
-<li>MagSafe LED control follows wall power: orange while <code>batt</code> lets the Mac charge, green while it holds the limit.</li>
-<li>If the SMC charge keys are gated <strong>and</strong> the adapter key is unavailable, <code>batt</code> uses the native macOS limit instead (80% and above only), driven through PowerUIAgent.</li>
+<li>MagSafe LED control is unavailable, because <code>batt</code> does not toggle the charge state directly.</li>
+<li>Native control remains the default when charge keys are gated; adapter mode must be enabled explicitly.</li>
 </ul>
-<p><code>batt</code> selects the backend automatically at runtime from which SMC keys and services are usable; it does not branch on the reported macOS or firmware version.</p>
+<p><code>batt</code> selects the backend from usable SMC keys and services; exact native targets require macOS 27.</p>
 
 
 

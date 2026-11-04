@@ -608,10 +608,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#but-macos-has-similar-features-built-in-is-it" class="md-nav__link">
+  <a href="#but-macos-has-similar-features-built-in-doesnt-it" class="md-nav__link">
     <span class="md-ellipsis">
       
-        But macOS has similar features built-in, is it?
+        But macOS has similar features built-in, doesn't it?
       
     </span>
   </a>
@@ -860,10 +860,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#but-macos-has-similar-features-built-in-is-it" class="md-nav__link">
+  <a href="#but-macos-has-similar-features-built-in-doesnt-it" class="md-nav__link">
     <span class="md-ellipsis">
       
-        But macOS has similar features built-in, is it?
+        But macOS has similar features built-in, doesn't it?
       
     </span>
   </a>
@@ -891,12 +891,12 @@
 
 
 <h1 id="how-is-it-different-from-xxx">How is it different from XXX?<a class="headerlink" href="#how-is-it-different-from-xxx" title="Permanent link">&para;</a></h1>
-<p><strong>It is free and opensource</strong>. It even comes with some features (like idle sleep preventions and pre-sleep stop charging) that are only available in paid counterparts. It comes with no ads, no tracking, no telemetry, no analytics, no bullshit. It is open source, so you can read the code and verify that it does what it says it does.</p>
-<p><strong>It is simple but well-thought.</strong> It only does charge limiting and does it well. On firmware &lt; <code>20xxx</code>, <code>batt</code> handles sleep edge cases that can otherwise let a MacBook charge to 100%. On newer firmware, it delegates the range to Apple SMC so enforcement continues during sleep. Other features are intentionally limited to keep it simple. If you encounter a problem or want an additional feature, please raise an issue.</p>
-<p><strong>It is light-weight.</strong> No electron GUIs hogging your system resources like some other tools. You can use batt on the command-line, or use the native macOS menubar app if you prefer a GUI. The GUI is written using native macOS APIs, so it is light-weight and fast.</p>
-<h3 id="but-macos-has-similar-features-built-in-is-it">But macOS has similar features built-in, is it?<a class="headerlink" href="#but-macos-has-similar-features-built-in-is-it" title="Permanent link">&para;</a></h3>
-<p>Yes, macOS has optimized battery charging. It will try to find out your charging and working schedule and prohibits charging above 80% for a couple of hours overnight. However, if you have an un-regular schedule, this will simply not work. Also, you lose predictability (which I value a lot) about your computer's behavior, i.e., by letting macOS decide for you, you, the one who knows your schedule the best, cannot control when to charge or when not to charge.</p>
-<p><code>batt</code> can make sure your computer does exactly what you want. You can set a maximum charge level, and it will stop charging when the battery reaches that level. Therefore, it is recommended to disable macOS's optimized charging when using <code>batt</code>.</p>
+<p><strong>It is free and open source</strong>. It even comes with some features (like idle sleep prevention and pre-sleep stop charging) that are only available in paid counterparts. It comes with no ads, no tracking, no telemetry, no analytics, no bullshit. It is open source, so you can read the code and verify that it does what it says it does.</p>
+<p><strong>It is simple but well-thought.</strong> It only does charge limiting and does it well. With legacy direct control, <code>batt</code> handles sleep edge cases that can otherwise let a MacBook charge to 100%. With firmware-managed or native control, Apple retains the configured range or target during sleep. Other features are intentionally limited to keep it simple. If you encounter a problem or want an additional feature, please raise an issue.</p>
+<p><strong>It is light-weight.</strong> No electron GUIs hogging your system resources like some other tools. You can use batt on the command-line, or use the native macOS menu bar app if you prefer a GUI. The GUI is written using native macOS APIs, so it is light-weight and fast.</p>
+<h3 id="but-macos-has-similar-features-built-in-doesnt-it">But macOS has similar features built-in, doesn't it?<a class="headerlink" href="#but-macos-has-similar-features-built-in-doesnt-it" title="Permanent link">&para;</a></h3>
+<p>Yes, macOS has optimized battery charging. It will try to find out your charging and working schedule and prohibits charging above 80% for a couple of hours overnight. However, if you have an irregular schedule, this will simply not work. Also, you lose predictability (which I value a lot) about your computer's behavior, i.e., by letting macOS decide for you, you, the one who knows your schedule the best, cannot control when to charge or when not to charge.</p>
+<p><code>batt</code> lets you choose a maximum charge level. In native mode, macOS applies the target asynchronously and can temporarily override it to charge fully.</p>
 
 
 

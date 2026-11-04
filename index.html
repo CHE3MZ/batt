@@ -657,6 +657,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Acknowledgements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#contributors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contributors
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1299,6 +1316,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Acknowledgements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#contributors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contributors
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1334,7 +1368,7 @@
 
 <div class="admonition note">
 <p class="admonition-title">Feb 17, 2026 UPDATE:</p>
-<p>Finally, after more than 5 years, macOS 26.4 and later supports charge limiting natively (adjustable from 80% to 100%), so <strong><em><code>batt</code> is not needed if the built-in range meets your needs</em></strong>. <code>batt</code> remains useful on older releases and when you want a limit below 80%. On macOS 27-era firmware, <code>batt</code> programs the firmware's charge-limit facility directly.</p>
+<p>Finally, after more than 5 years, macOS 26.4 and later supports charge limiting natively (adjustable from 80% to 100%), so <strong><em><code>batt</code> is not needed if the built-in range meets your needs</em></strong>. <code>batt</code> remains useful on older releases and when you want a limit below 80%. On macOS 27-era firmware, <code>batt</code> supports native limits below 80% when direct SMC control is unavailable.</p>
 </div>
 <p><img src="assets/icon.png" alt="Batt Logo" width="128" /></p>
 <h1 id="batt"><strong>Batt</strong><a class="headerlink" href="#batt" title="Permanent link">&para;</a></h1>
@@ -1351,7 +1385,6 @@
 </div>
 <p>Previously, before optimized battery charging was introduced, MacBooks are known to suffer from battery swelling when they are kept at 100% all the time, especially the 2015s. Even with optimized battery charging, the effect is not optimal <span style="font-size: 13px;">(described <a href="comparison/#but-macos-has-similar-features-built-in-is-it">here</a>)</span></p>
 <p><code>batt</code> can effectively alleviate this problem by limiting the battery charge level. It can be used to set a maximum charge level. For example, you can set it to 80%, and it will stop charging when the battery reaches 80%.</p>
-<p>On older firmware, the computer then runs from wall power and the battery percentage remains steady. On macOS 27-era firmware, Apple changed the mechanism: the firmware may run the Mac from the battery when it is above the limit, so the percentage can drop until it returns to the configured range.</p>
 <h3 id="guides">Guides<a class="headerlink" href="#guides" title="Permanent link">&para;</a></h3>
 <p><a class="md-button md-button--primary" href="installation/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M96 512h320c17.7 0 32-14.3 32-32s-14.3-32-32-32v-66.7c18.6-6.6 32-24.4 32-45.3V48c0-26.5-21.5-48-48-48h-48v169.4c0 12.5-10.1 22.6-22.6 22.6-6 0-11.8-2.4-16-6.6L272 144l-41.4 41.4c-4.2 4.2-10 6.6-16 6.6-12.5 0-22.6-10.1-22.6-22.6V0H96C43 0 0 43 0 96v320c0 53 43 96 96 96m-32-96c0-17.7 14.3-32 32-32h256v64H96c-17.7 0-32-14.3-32-32"/></svg></span> Installation</a>
 <a class="md-button md-button--primary" href="compatibility/"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M96 512h320c17.7 0 32-14.3 32-32s-14.3-32-32-32v-66.7c18.6-6.6 32-24.4 32-45.3V48c0-26.5-21.5-48-48-48h-48v169.4c0 12.5-10.1 22.6-22.6 22.6-6 0-11.8-2.4-16-6.6L272 144l-41.4 41.4c-4.2 4.2-10 6.6-16 6.6-12.5 0-22.6-10.1-22.6-22.6V0H96C43 0 0 43 0 96v320c0 53 43 96 96 96m-32-96c0-17.7 14.3-32 32-32h256v64H96c-17.7 0-32-14.3-32-32"/></svg></span> Compatibility</a>
@@ -1365,7 +1398,7 @@
 <a class="md-button md-button--primary" href="https://formulae.brew.sh/formula/batt#default"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M64 80c0-26.5 21.5-48 48-48h288c26.5 0 48 21.5 48 48v16h64c35.3 0 64 28.7 64 64v108.2c0 24.2-13.7 46.4-35.4 57.2L448 371.8V384c0 53-43 96-96 96H160c-53 0-96-43-96-96zm384 220.2 64-32V160h-64zM192 152c0-13.3-10.7-24-24-24s-24 10.7-24 24v208c0 13.3 10.7 24 24 24s24-10.7 24-24zm88 0c0-13.3-10.7-24-24-24s-24 10.7-24 24v208c0 13.3 10.7 24 24 24s24-10.7 24-24zm88 0c0-13.3-10.7-24-24-24s-24 10.7-24 24v208c0 13.3 10.7 24 24 24s24-10.7 24-24z"/></svg></span> Homebrew</a>
 <a class="md-button md-button--primary" href="https://github.com/charlie0129/batt"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg></span> GitHub</a></p>
 <h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">&para;</a></h2>
-<p><code>batt</code> tried to keep as simple as possible. Charging limiting is the only thing to care about for most users:</p>
+<p><code>batt</code> tries to keep things as simple as possible. Charge limiting is the only thing to care about for most users:</p>
 <ul>
 <li>Limit battery charge, with a lower and upper bound, like ThinkPads. <a href="usage/#limit-battery-charge">Docs</a></li>
 <li>Charge to the limit or to 100% once, without changing the limit. <a href="usage/#charge-once">Docs</a></li>
@@ -1388,14 +1421,14 @@
 <p class="admonition-title">Tip</p>
 <p>It is <em>highly</em> recommended to disable macOS's optimized charging when using <code>batt</code>. <br>
 To do so, open <code>System Settings</code> -&gt; <code>Battery</code> -&gt; <code>Battery Health</code> -&gt; <code>i</code> -&gt; Turn OFF <code>Optimized Battery Charging</code>. <br>
-Built-in charge limit also need to be disabled if you are on macOS 26.4 or later.</p>
+Disable the built-in charge limit when using direct SMC control. In native mode, <code>batt</code> manages that setting itself.</p>
 </div>
 <ul>
 <li>Download <code>.dmg</code> file from <a href="https://github.com/charlie0129/batt/releases">Releases</a> and open it (right-click open if macOS says it's damaged)</li>
 <li>Drag <code>batt.app</code> to <code>Applications</code></li>
 <li>macOS may say it's damaged when you try to run it. To fix it, run this in your Terminal: <br>
 <code>sudo xattr -r -d com.apple.quarantine /Applications/batt.app</code>.</li>
-<li>Run <code>batt.app</code> and Follow the MenuBar UI to install or upgrade.</li>
+<li>Run <code>batt.app</code> and follow the MenuBar UI to install or upgrade.</li>
 </ul>
 <p><img src="assets/screenshot-gui-setup.png" alt="Screenshot GUI Setup" width="320" /></p>
 <h3 id="installing-the-cli">Installing the CLI<a class="headerlink" href="#installing-the-cli" title="Permanent link">&para;</a></h3>
@@ -1526,12 +1559,12 @@ sudo<span class="w"> </span>brew<span class="w"> </span>services<span class="w">
 <h2 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h2>
 <p>You can think of <code>batt</code> like <code>docker</code>. It has a daemon that runs in the background, and a client (CLI or GUI) that communicates with the daemon. They communicate through unix domain socket as a way of IPC. The daemon does the actual heavy-lifting, and is responsible for controlling battery charging. The client is responsible for sending users' requirements to the daemon.</p>
 <p>For example, when you run <code>sudo batt limit 80</code>, the client will send the requirement to the daemon, and the daemon will do its job to keep the charge limit to 80%.</p>
-<p>The daemon selects one of two control backends from SMC key presence. The legacy backend continuously reads battery percentage and toggles charging itself. The firmware backend writes lower/upper limits and periodically reconciles them while Apple firmware enforces the range, including during sleep. The same capability data is exposed to CLI and GUI clients so unsupported features are not offered.</p>
+<p>The daemon selects a control backend from usable SMC keys and native services. The legacy backend continuously reads battery percentage and toggles charging itself. The firmware backend writes lower/upper limits and periodically reconciles them while Apple firmware enforces the range, including during sleep. The native backend keeps PowerUIAgent's upper target in sync; opt-in adapter mode toggles wall power. The same capability data is exposed to CLI and GUI clients so unsupported features are not offered.</p>
 <h2 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">&para;</a></h2>
 <p>I created this tool simply because I am not satisfied with existing tools 😐.</p>
-<p>I have written and using similar utils (to limit charging) on Intel MacBooks for years. Finally I got hands on an Apple Silicon MacBook (yes, 2 years later since it is introduced 😅 and I just got my first one). The old BCLM way to limit charging doesn't work anymore. I was looking for a tool to limit charging on M1 MacBooks.</p>
+<p>I have written and used similar utils (to limit charging) on Intel MacBooks for years. Finally I got hands on an Apple Silicon MacBook (yes, 2 years after it was introduced 😅 and I just got my first one). The old BCLM way to limit charging doesn't work anymore. I was looking for a tool to limit charging on M1 MacBooks.</p>
 <p>I have tried some alternatives, both closed source and open source, but I kept none of them. Some paid alternatives' licensing options are just too limited 🤔, a bit bloated, require periodic Internet connection (hmm?) and are closed source. It doesn't seem a good option for me. Some open source alternatives just don't handle edge cases well and I encountered issues regularly especially when sleeping (as of Apr 2023).</p>
-<p>I want a <em>simple</em> tool that does just one thing, and <strong>does it well</strong> -- limiting charging, just like the <a href="https://en.wikipedia.org/wiki/Unix_philosophy">Unix philosophy</a>. It seems I don't have any options but to develop by myself. So I spent a weekend developing an MVP, so here we are! <code>batt</code> is here!</p>
+<p>I want a <em>simple</em> tool that does just one thing, and <strong>does it well</strong> -- limiting charging, just like the <a href="https://en.wikipedia.org/wiki/Unix_philosophy">Unix philosophy</a>. It seems I don't have any options but to develop it myself. So I spent a weekend developing an MVP, so here we are! <code>batt</code> is here!</p>
 <h2 id="acknowledgements">Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://github.com/actuallymentor/battery">actuallymentor/battery</a> for various SMC keys.</li>
@@ -1545,6 +1578,10 @@ sudo<span class="w"> </span>brew<span class="w"> </span>services<span class="w">
 <li><a href="https://github.com/brookqin">@brookqin</a> for implementing auto calibration.</li>
 <li><a href="https://github.com/ashwinr64">@ashwinr64</a> for investigating SMC keys on macOS 27 <a href="https://github.com/charlie0129/batt/pull/140#issuecomment-4950731214">#140 comment</a> <a href="https://github.com/actuallymentor/battery/pull/469">actuallymentor/battery#469</a>, also <a href="https://github.com/lilianmoraru">@lilianmoraru</a> for the initial PR.</li>
 </ul>
+<h3 id="contributors">Contributors<a class="headerlink" href="#contributors" title="Permanent link">&para;</a></h3>
+<p><a href="https://github.com/charlie0129/batt/graphs/contributors">
+  <img alt="Batt contributors" src="https://contrib.rocks/image?repo=charlie0129/batt" />
+</a></p>
 <h2 id="star-history">Star History<a class="headerlink" href="#star-history" title="Permanent link">&para;</a></h2>
 <p><a href="https://star-history.dera.page/#charlie0129/batt&amp;Date"><img alt="Star History Chart" src="https://star-history.dera.page/svg?repos=charlie0129/batt&amp;type=Date" /></a></p>
 
